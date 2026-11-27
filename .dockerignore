@@ -1,0 +1,8 @@
+*
+!requirements-api.txt
+!siteguard/
+!api/
+!models/siteguard.onnx
+!models/metrics.json
+!configs/thresholds_*.json
+**/__pycache__

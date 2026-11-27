@@ -1,0 +1,136 @@
+{
+  "min_confidence": 0.25,
+  "class_confidence": {
+    "Person": 0.3,
+    "no_helmet": 0.05,
+    "helmet": 0.35,
+    "no_vest": 0.05,
+    "vest": 0.25
+  },
+  "tuned_on": "val",
+  "objective": "violation F2",
+  "validation": {
+    "helmet": {
+      "default": {
+        "violation_recall": 0.519,
+        "violation_precision": 0.93,
+        "violation_f2": 0.57,
+        "false_alarm_rate": 0.013,
+        "spurious_worker_flags": 0,
+        "silent_miss_rate": 0.104,
+        "strict_recall": 0.818,
+        "ok_recall": 0.816,
+        "gt_missing": 77,
+        "gt_ok": 158,
+        "confusion": {
+          "missing->missing": 40,
+          "missing->no-person": 6,
+          "missing->ok": 8,
+          "missing->unknown": 23,
+          "no-worker->ok": 1,
+          "no-worker->unknown": 19,
+          "ok->missing": 2,
+          "ok->no-person": 4,
+          "ok->ok": 129,
+          "ok->unknown": 23,
+          "unknown->missing": 1,
+          "unknown->no-person": 4,
+          "unknown->unknown": 2
+        }
+      },
+      "tuned": {
+        "violation_recall": 0.597,
+        "violation_precision": 0.902,
+        "violation_f2": 0.641,
+        "false_alarm_rate": 0.019,
+        "spurious_worker_flags": 0,
+        "silent_miss_rate": 0.065,
+        "strict_recall": 0.857,
+        "ok_recall": 0.791,
+        "gt_missing": 77,
+        "gt_ok": 158,
+        "confusion": {
+          "missing->missing": 46,
+          "missing->no-person": 6,
+          "missing->ok": 5,
+          "missing->unknown": 20,
+          "no-worker->ok": 1,
+          "no-worker->unknown": 11,
+          "ok->missing": 3,
+          "ok->no-person": 4,
+          "ok->ok": 125,
+          "ok->unknown": 26,
+          "unknown->missing": 2,
+          "unknown->no-person": 4,
+          "unknown->unknown": 1
+        }
+      },
+      "thresholds": {
+        "no_helmet": 0.05,
+        "helmet": 0.35,
+        "Person": 0.3
+      }
+    },
+    "vest": {
+      "default": {
+        "violation_recall": 0.698,
+        "violation_precision": 0.968,
+        "violation_f2": 0.739,
+        "false_alarm_rate": 0.005,
+        "spurious_worker_flags": 0,
+        "silent_miss_rate": 0.093,
+        "strict_recall": 0.791,
+        "ok_recall": 0.865,
+        "gt_missing": 43,
+        "gt_ok": 193,
+        "confusion": {
+          "missing->missing": 30,
+          "missing->no-person": 5,
+          "missing->ok": 4,
+          "missing->unknown": 4,
+          "no-worker->ok": 1,
+          "no-worker->unknown": 19,
+          "ok->missing": 1,
+          "ok->no-person": 5,
+          "ok->ok": 167,
+          "ok->unknown": 20,
+          "unknown->no-person": 4,
+          "unknown->unknown": 2
+        }
+      },
+      "tuned": {
+        "violation_recall": 0.721,
+        "violation_precision": 0.939,
+        "violation_f2": 0.756,
+        "false_alarm_rate": 0.005,
+        "spurious_worker_flags": 0,
+        "silent_miss_rate": 0.093,
+        "strict_recall": 0.791,
+        "ok_recall": 0.865,
+        "gt_missing": 43,
+        "gt_ok": 193,
+        "confusion": {
+          "missing->missing": 31,
+          "missing->no-person": 5,
+          "missing->ok": 4,
+          "missing->unknown": 3,
+          "no-worker->ok": 1,
+          "no-worker->unknown": 11,
+          "ok->missing": 1,
+          "ok->no-person": 5,
+          "ok->ok": 167,
+          "ok->unknown": 20,
+          "unknown->missing": 1,
+          "unknown->no-person": 4,
+          "unknown->unknown": 1
+        }
+      },
+      "thresholds": {
+        "no_vest": 0.05,
+        "vest": 0.25,
+        "Person": 0.3
+      }
+    }
+  },
+  "imgsz": 640
+}

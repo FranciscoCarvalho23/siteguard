@@ -1,0 +1,469 @@
+{
+  "model": "ppe_yolo11n_640.pt",
+  "detection": {
+    "640": {
+      "imgsz": 640,
+      "mAP50": 0.7389,
+      "mAP50-95": 0.515,
+      "precision": 0.829,
+      "recall": 0.6693,
+      "per_class": {
+        "helmet": {
+          "precision": 0.873,
+          "recall": 0.745,
+          "mAP50": 0.82,
+          "mAP50-95": 0.608
+        },
+        "gloves": {
+          "precision": 0.872,
+          "recall": 0.75,
+          "mAP50": 0.806,
+          "mAP50-95": 0.601
+        },
+        "vest": {
+          "precision": 0.938,
+          "recall": 0.853,
+          "mAP50": 0.912,
+          "mAP50-95": 0.693
+        },
+        "boots": {
+          "precision": 0.851,
+          "recall": 0.64,
+          "mAP50": 0.756,
+          "mAP50-95": 0.559
+        },
+        "goggles": {
+          "precision": 0.79,
+          "recall": 0.942,
+          "mAP50": 0.931,
+          "mAP50-95": 0.599
+        },
+        "Person": {
+          "precision": 0.887,
+          "recall": 0.896,
+          "mAP50": 0.93,
+          "mAP50-95": 0.752
+        },
+        "no_helmet": {
+          "precision": 0.834,
+          "recall": 0.48,
+          "mAP50": 0.6,
+          "mAP50-95": 0.363
+        },
+        "no_goggle": {
+          "precision": 0.586,
+          "recall": 0.121,
+          "mAP50": 0.223,
+          "mAP50-95": 0.053
+        },
+        "no_gloves": {
+          "precision": 0.823,
+          "recall": 0.571,
+          "mAP50": 0.632,
+          "mAP50-95": 0.379
+        },
+        "no_boots": {
+          "precision": 0.844,
+          "recall": 0.667,
+          "mAP50": 0.734,
+          "mAP50-95": 0.569
+        },
+        "forklift": {
+          "precision": 0.735,
+          "recall": 0.781,
+          "mAP50": 0.802,
+          "mAP50-95": 0.542
+        },
+        "no_vest": {
+          "precision": 0.916,
+          "recall": 0.585,
+          "mAP50": 0.721,
+          "mAP50-95": 0.462
+        }
+      },
+      "save_dir": "/home/claude/siteguard/runs/eval/ppe_yolo11n_640_test_640"
+    },
+    "960": {
+      "imgsz": 960,
+      "mAP50": 0.7664,
+      "mAP50-95": 0.5208,
+      "precision": 0.8271,
+      "recall": 0.6961,
+      "per_class": {
+        "helmet": {
+          "precision": 0.939,
+          "recall": 0.82,
+          "mAP50": 0.888,
+          "mAP50-95": 0.679
+        },
+        "gloves": {
+          "precision": 0.871,
+          "recall": 0.793,
+          "mAP50": 0.848,
+          "mAP50-95": 0.67
+        },
+        "vest": {
+          "precision": 0.932,
+          "recall": 0.888,
+          "mAP50": 0.939,
+          "mAP50-95": 0.68
+        },
+        "boots": {
+          "precision": 0.87,
+          "recall": 0.709,
+          "mAP50": 0.807,
+          "mAP50-95": 0.607
+        },
+        "goggles": {
+          "precision": 0.815,
+          "recall": 0.95,
+          "mAP50": 0.938,
+          "mAP50-95": 0.583
+        },
+        "Person": {
+          "precision": 0.911,
+          "recall": 0.917,
+          "mAP50": 0.952,
+          "mAP50-95": 0.722
+        },
+        "no_helmet": {
+          "precision": 0.834,
+          "recall": 0.525,
+          "mAP50": 0.676,
+          "mAP50-95": 0.415
+        },
+        "no_goggle": {
+          "precision": 0.602,
+          "recall": 0.073,
+          "mAP50": 0.226,
+          "mAP50-95": 0.062
+        },
+        "no_gloves": {
+          "precision": 0.83,
+          "recall": 0.626,
+          "mAP50": 0.691,
+          "mAP50-95": 0.385
+        },
+        "no_boots": {
+          "precision": 0.885,
+          "recall": 0.651,
+          "mAP50": 0.775,
+          "mAP50-95": 0.612
+        },
+        "forklift": {
+          "precision": 0.616,
+          "recall": 0.808,
+          "mAP50": 0.75,
+          "mAP50-95": 0.456
+        },
+        "no_vest": {
+          "precision": 0.82,
+          "recall": 0.595,
+          "mAP50": 0.706,
+          "mAP50-95": 0.378
+        }
+      },
+      "save_dir": "/home/claude/siteguard/runs/eval/ppe_yolo11n_640_test_960"
+    }
+  },
+  "test": {
+    "mAP50": 0.7389,
+    "mAP50-95": 0.515,
+    "precision": 0.829,
+    "recall": 0.6693
+  },
+  "compliance": {
+    "640": {
+      "default": {
+        "min_confidence": 0.25,
+        "class_confidence": {},
+        "workers": 481,
+        "worker_detection_recall": 0.902,
+        "items": {
+          "helmet": {
+            "violation_recall": 0.552,
+            "violation_precision": 0.95,
+            "violation_f2": 0.602,
+            "false_alarm_rate": 0.014,
+            "spurious_worker_flags": 1,
+            "silent_miss_rate": 0.115,
+            "strict_recall": 0.776,
+            "ok_recall": 0.793,
+            "gt_missing": 174,
+            "gt_ok": 280,
+            "confusion": {
+              "missing->missing": 96,
+              "missing->no-person": 19,
+              "missing->ok": 20,
+              "missing->unknown": 39,
+              "no-worker->missing": 1,
+              "no-worker->unknown": 49,
+              "ok->missing": 4,
+              "ok->no-person": 10,
+              "ok->ok": 222,
+              "ok->unknown": 44,
+              "unknown->no-person": 18,
+              "unknown->ok": 2,
+              "unknown->unknown": 7
+            }
+          },
+          "vest": {
+            "violation_recall": 0.614,
+            "violation_precision": 0.929,
+            "violation_f2": 0.659,
+            "false_alarm_rate": 0.009,
+            "spurious_worker_flags": 2,
+            "silent_miss_rate": 0.094,
+            "strict_recall": 0.756,
+            "ok_recall": 0.87,
+            "gt_missing": 127,
+            "gt_ok": 338,
+            "confusion": {
+              "missing->missing": 78,
+              "missing->no-person": 19,
+              "missing->ok": 12,
+              "missing->unknown": 18,
+              "no-worker->missing": 2,
+              "no-worker->ok": 3,
+              "no-worker->unknown": 45,
+              "ok->missing": 3,
+              "ok->no-person": 14,
+              "ok->ok": 294,
+              "ok->unknown": 27,
+              "unknown->missing": 1,
+              "unknown->no-person": 14,
+              "unknown->unknown": 1
+            }
+          }
+        }
+      },
+      "tuned": {
+        "min_confidence": 0.25,
+        "class_confidence": {
+          "Person": 0.3,
+          "no_helmet": 0.05,
+          "helmet": 0.35,
+          "no_vest": 0.05,
+          "vest": 0.25
+        },
+        "workers": 481,
+        "worker_detection_recall": 0.898,
+        "items": {
+          "helmet": {
+            "violation_recall": 0.603,
+            "violation_precision": 0.875,
+            "violation_f2": 0.643,
+            "false_alarm_rate": 0.039,
+            "spurious_worker_flags": 3,
+            "silent_miss_rate": 0.069,
+            "strict_recall": 0.81,
+            "ok_recall": 0.768,
+            "gt_missing": 174,
+            "gt_ok": 280,
+            "confusion": {
+              "missing->missing": 105,
+              "missing->no-person": 21,
+              "missing->ok": 12,
+              "missing->unknown": 36,
+              "no-worker->missing": 3,
+              "no-worker->unknown": 32,
+              "ok->missing": 11,
+              "ok->no-person": 10,
+              "ok->ok": 215,
+              "ok->unknown": 44,
+              "unknown->missing": 1,
+              "unknown->no-person": 18,
+              "unknown->ok": 1,
+              "unknown->unknown": 7
+            }
+          },
+          "vest": {
+            "violation_recall": 0.614,
+            "violation_precision": 0.876,
+            "violation_f2": 0.653,
+            "false_alarm_rate": 0.018,
+            "spurious_worker_flags": 4,
+            "silent_miss_rate": 0.094,
+            "strict_recall": 0.74,
+            "ok_recall": 0.87,
+            "gt_missing": 127,
+            "gt_ok": 338,
+            "confusion": {
+              "missing->missing": 78,
+              "missing->no-person": 21,
+              "missing->ok": 12,
+              "missing->unknown": 16,
+              "no-worker->missing": 4,
+              "no-worker->ok": 2,
+              "no-worker->unknown": 29,
+              "ok->missing": 6,
+              "ok->no-person": 14,
+              "ok->ok": 294,
+              "ok->unknown": 24,
+              "unknown->missing": 1,
+              "unknown->no-person": 14,
+              "unknown->unknown": 1
+            }
+          }
+        }
+      }
+    },
+    "960": {
+      "default": {
+        "min_confidence": 0.25,
+        "class_confidence": {},
+        "workers": 481,
+        "worker_detection_recall": 0.938,
+        "items": {
+          "helmet": {
+            "violation_recall": 0.626,
+            "violation_precision": 0.94,
+            "violation_f2": 0.671,
+            "false_alarm_rate": 0.018,
+            "spurious_worker_flags": 2,
+            "silent_miss_rate": 0.098,
+            "strict_recall": 0.833,
+            "ok_recall": 0.843,
+            "gt_missing": 174,
+            "gt_ok": 280,
+            "confusion": {
+              "missing->missing": 109,
+              "missing->no-person": 12,
+              "missing->ok": 17,
+              "missing->unknown": 36,
+              "no-worker->missing": 2,
+              "no-worker->ok": 2,
+              "no-worker->unknown": 41,
+              "ok->missing": 5,
+              "ok->no-person": 7,
+              "ok->ok": 236,
+              "ok->unknown": 32,
+              "unknown->no-person": 11,
+              "unknown->ok": 2,
+              "unknown->unknown": 14
+            }
+          },
+          "vest": {
+            "violation_recall": 0.661,
+            "violation_precision": 0.923,
+            "violation_f2": 0.701,
+            "false_alarm_rate": 0.012,
+            "spurious_worker_flags": 3,
+            "silent_miss_rate": 0.063,
+            "strict_recall": 0.843,
+            "ok_recall": 0.911,
+            "gt_missing": 127,
+            "gt_ok": 338,
+            "confusion": {
+              "missing->missing": 84,
+              "missing->no-person": 12,
+              "missing->ok": 8,
+              "missing->unknown": 23,
+              "no-worker->missing": 3,
+              "no-worker->ok": 9,
+              "no-worker->unknown": 33,
+              "ok->missing": 4,
+              "ok->no-person": 9,
+              "ok->ok": 308,
+              "ok->unknown": 17,
+              "unknown->no-person": 9,
+              "unknown->ok": 2,
+              "unknown->unknown": 5
+            }
+          }
+        }
+      },
+      "tuned": {
+        "min_confidence": 0.25,
+        "class_confidence": {
+          "Person": 0.25,
+          "no_helmet": 0.05,
+          "helmet": 0.45,
+          "no_vest": 0.05,
+          "vest": 0.4
+        },
+        "workers": 481,
+        "worker_detection_recall": 0.938,
+        "items": {
+          "helmet": {
+            "violation_recall": 0.718,
+            "violation_precision": 0.868,
+            "violation_f2": 0.744,
+            "false_alarm_rate": 0.039,
+            "spurious_worker_flags": 5,
+            "silent_miss_rate": 0.04,
+            "strict_recall": 0.891,
+            "ok_recall": 0.8,
+            "gt_missing": 174,
+            "gt_ok": 280,
+            "confusion": {
+              "missing->missing": 125,
+              "missing->no-person": 12,
+              "missing->ok": 7,
+              "missing->unknown": 30,
+              "no-worker->missing": 5,
+              "no-worker->ok": 2,
+              "no-worker->unknown": 38,
+              "ok->missing": 11,
+              "ok->no-person": 7,
+              "ok->ok": 224,
+              "ok->unknown": 38,
+              "unknown->missing": 3,
+              "unknown->no-person": 11,
+              "unknown->ok": 1,
+              "unknown->unknown": 12
+            }
+          },
+          "vest": {
+            "violation_recall": 0.709,
+            "violation_precision": 0.841,
+            "violation_f2": 0.732,
+            "false_alarm_rate": 0.027,
+            "spurious_worker_flags": 6,
+            "silent_miss_rate": 0.039,
+            "strict_recall": 0.866,
+            "ok_recall": 0.885,
+            "gt_missing": 127,
+            "gt_ok": 338,
+            "confusion": {
+              "missing->missing": 90,
+              "missing->no-person": 12,
+              "missing->ok": 5,
+              "missing->unknown": 20,
+              "no-worker->missing": 6,
+              "no-worker->ok": 3,
+              "no-worker->unknown": 36,
+              "ok->missing": 9,
+              "ok->no-person": 9,
+              "ok->ok": 299,
+              "ok->unknown": 21,
+              "unknown->missing": 2,
+              "unknown->no-person": 9,
+              "unknown->ok": 2,
+              "unknown->unknown": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  "export": {
+    "onnx_file": "siteguard.onnx",
+    "onnx_mb": 11.02,
+    "pt_mb": 5.48,
+    "imgsz": 960,
+    "parity": {
+      "images": 40,
+      "boxes_pytorch": 707,
+      "boxes_onnx": 707,
+      "pytorch_boxes_found_by_onnx": 1.0,
+      "onnx_boxes_found_by_pytorch": 1.0,
+      "max_box_deviation_px": 1.04,
+      "max_confidence_deviation": 0.0
+    },
+    "latency_cpu": {
+      "pytorch_ms": 141.4,
+      "onnx_ms": 124.0
+    }
+  }
+}

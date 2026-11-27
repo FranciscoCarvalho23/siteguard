@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SiteGuard - PPE compliance</title>
+<style>
+  :root { --ok:#2f9e44; --bad:#e03131; --unk:#f08c00; --ink:#1f2328; --muted:#656d76; --line:#d0d7de; --bg:#f6f8fa; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:#fff; }
+  header { padding:18px 28px; border-bottom:1px solid var(--line); display:flex; align-items:baseline; gap:14px; }
+  header h1 { font-size:20px; margin:0; }
+  header span { color:var(--muted); }
+  main { display:grid; grid-template-columns: 300px 1fr; gap:24px; padding:24px 28px; }
+  aside { display:flex; flex-direction:column; gap:16px; }
+  .drop { border:2px dashed var(--line); border-radius:10px; padding:26px 16px; text-align:center; cursor:pointer; background:var(--bg); }
+  .drop.over { border-color:#4263eb; background:#edf2ff; }
+  label { display:block; font-weight:600; margin-bottom:4px; }
+  .row { display:flex; flex-wrap:wrap; gap:6px 14px; }
+  .row label { font-weight:400; display:flex; gap:6px; align-items:center; margin:0; }
+  button { padding:10px 14px; border:0; border-radius:8px; background:#1f2328; color:#fff; font-weight:600; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:default; }
+  .kpis { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin-bottom:16px; }
+  .kpi { border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
+  .kpi b { display:block; font-size:26px; }
+  .kpi.ok b { color:var(--ok); } .kpi.bad b { color:var(--bad); } .kpi.unk b { color:var(--unk); }
+  #result img { max-width:100%; border-radius:10px; border:1px solid var(--line); }
+  table { border-collapse:collapse; width:100%; margin-top:16px; font-size:14px; }
+  th, td { text-align:left; padding:6px 10px; border-bottom:1px solid var(--line); }
+  .pill { padding:2px 8px; border-radius:99px; color:#fff; font-size:12px; font-weight:600; }
+  .compliant { background:var(--ok); } .violation { background:var(--bad); } .unverified { background:var(--unk); }
+  .muted { color:var(--muted); font-size:13px; }
+  .err { color:var(--bad); }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } .kpis { grid-template-columns:repeat(2,1fr); } }
+</style>
+</head>
+<body>
+<header><h1>SiteGuard</h1><span>Who on site is missing PPE?</span></header>
+<main>
+  <aside>
+    <div class="drop" id="drop">Drop a site photo here<br><span class="muted">or click to choose (JPEG/PNG)</span>
+      <input type="file" id="file" accept="image/*" hidden></div>
+    <div>
+      <label>Required PPE</label>
+      <div class="row" id="items">
+        <label><input type="checkbox" value="helmet" checked> helmet</label>
+        <label><input type="checkbox" value="vest" checked> vest</label>
+        <label><input type="checkbox" value="goggles"> goggles</label>
+        <label><input type="checkbox" value="gloves"> gloves</label>
+        <label><input type="checkbox" value="boots"> boots</label>
+      </div>
+    </div>
+    <div>
+      <label for="conf">Confidence: <span id="confv">0.25</span></label>
+      <input type="range" id="conf" min="0.05" max="0.9" step="0.05" value="0.25" style="width:100%">
+    </div>
+    <div class="row"><label><input type="checkbox" id="strict"> Strict: treat "not visible" as a violation</label></div>
+    <button id="run" disabled>Analyse</button>
+    <p class="muted" id="model"></p>
+  </aside>
+  <section id="result"><p class="muted">Results appear here.</p></section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+let file = null;
+const drop = $("drop");
+drop.onclick = () => $("file").click();
+$("file").onchange = (e) => pick(e.target.files[0]);
+drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = (e) => { e.preventDefault(); drop.classList.remove("over"); pick(e.dataTransfer.files[0]); };
+$("conf").oninput = () => $("confv").textContent = $("conf").value;
+$("run").onclick = analyse;
+
+function pick(f) { if (!f) return; file = f; drop.firstChild.textContent = f.name; $("run").disabled = false; analyse(); }
+
+fetch("/v1/model").then(r => r.json()).then(m => {
+  const map = m.metrics && m.metrics.test && m.metrics.test.mAP50;
+  $("model").textContent = `Model: ${m.file} (${m.backend}, ${m.input_size}px)` + (map ? ` · test mAP50 ${map.toFixed(3)}` : "");
+});
+
+async function analyse() {
+  if (!file) return;
+  const items = [...document.querySelectorAll("#items input:checked")].map(i => i.value).join(",");
+  const q = new URLSearchParams({ conf: $("conf").value, required: items, strict: $("strict").checked, return_image: true });
+  const fd = new FormData(); fd.append("file", file);
+  $("run").disabled = true; $("result").innerHTML = '<p class="muted">Analysing…</p>';
+  try {
+    const r = await fetch(`/v1/detect?${q}`, { method: "POST", body: fd });
+    const body = await r.json();
+    if (!r.ok) throw new Error(body.detail || r.statusText);
+    render(body);
+  } catch (e) {
+    $("result").innerHTML = `<p class="err">${String(e.message || e).replace(/</g, "&lt;")}</p>`;
+  } finally { $("run").disabled = false; }
+}
+
+function render(b) {
+  const s = b.compliance.summary;
+  const rows = b.compliance.people.map((p, i) => {
+    const items = Object.entries(p.items).map(([k, v]) => `${k}: ${v.status}${v.confidence ? " (" + v.confidence.toFixed(2) + ")" : ""}`).join(" · ");
+    return `<tr><td>${i + 1}</td><td><span class="pill ${p.status}">${p.status}</span></td><td>${items}</td><td>${p.confidence.toFixed(2)}</td></tr>`;
+  }).join("");
+  $("result").innerHTML = `
+    <div class="kpis">
+      <div class="kpi"><span>Workers</span><b>${s.people}</b></div>
+      <div class="kpi ok"><span>Compliant</span><b>${s.compliant}</b></div>
+      <div class="kpi bad"><span>Violations</span><b>${s.violation + s.unassigned_violations}</b></div>
+      <div class="kpi unk"><span>Unverified</span><b>${s.unverified}</b></div>
+    </div>
+    <img src="data:image/jpeg;base64,${b.image_base64}" alt="annotated result">
+    <p class="muted">Inference ${b.latency_ms.inference} ms · ${b.image.width}×${b.image.height}px</p>
+    <table><thead><tr><th>#</th><th>Status</th><th>PPE</th><th>Person conf.</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+</script>
+</body>
+</html>

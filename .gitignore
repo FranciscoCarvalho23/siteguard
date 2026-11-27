@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+runs/
+datasets/
+data/*.txt
+models/pretrained/
+*.cache
+configs/ppe.yaml

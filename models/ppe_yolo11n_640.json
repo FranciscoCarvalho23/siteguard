@@ -1,0 +1,18 @@
+{
+  "source_weights": "yolo11n.pt",
+  "train_args": {
+    "model": "yolo11n.pt",
+    "data": "/home/claude/siteguard/configs/ppe.yaml",
+    "epochs": 20,
+    "imgsz": 640,
+    "batch": 8,
+    "device": "cpu",
+    "workers": 2,
+    "fraction": 1.0,
+    "patience": 8,
+    "name": "yolo11n_640",
+    "seed": 0
+  },
+  "train_time_s": 6585.7,
+  "run_dir": "/home/claude/siteguard/runs/train/yolo11n_640"
+}
